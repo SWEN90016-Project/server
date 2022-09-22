@@ -4,7 +4,7 @@ import bodyParser from "body-parser";
 import morgan from "morgan";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-// import sampleRouter from "./routes/api.js";
+import api from "./routes/api.js";
 import { signup, signin, protect } from "./utils/auth.js";
 export const app = express();
 dotenv.config();
@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("dev"));
 app.post("/signup", signup);
 app.post("/signin", signin);
-// app.use("/test", sampleRouter);
+app.use("/api", api);
 
 const port = process.env.PORT || 9000;
 mongoose

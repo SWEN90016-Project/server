@@ -2,7 +2,6 @@ import multer from "multer";
 import File from "../models/file.js";
 import path from "path";
 import fs from "fs";
-
 const storage = multer.diskStorage({
   destination: "./uploads/",
   filename: function (req, file, callback) {
@@ -13,36 +12,18 @@ const storage = multer.diskStorage({
   },
 });
 
-// var storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, "uploads");
-//   },
-//   filename: (req, file, cb) => {
-//     cb(null, file.fieldname + "-" + Date.now());
-//   },
-// });
-// const storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, "uploads");
-//   },
-//   filename: (req, file, cb) => {
-//     cb(
-//       null,
-//       new Date().toISOString().replace(/:/g, "-") + "-" + file.originalname
-//     );
-//   },
-// });
 export const upload = multer({ storage });
 
 export const fileUpload = async (req, res, next) => {
   try {
-    console.log(req.file);
+    console.log(req.body);
     const file = new File({
       fileName: req.file.originalname,
       fileType: req.file.mimetype,
       fileSize: req.file.size,
       filePath: req.file.path,
-      text: req.body.filename,
+      text: req.body.text,
+      title: req.body.title,
     });
     const fileUploaded = await file.save();
     res.status(201).json({ message: "the file upload success", fileUploaded });
@@ -63,29 +44,21 @@ export const getFiles = async (req, res) => {
     res.status(404).end();
   }
 };
-// export const fileUpload = async (req, res, next) => {
-//   console.log(req);
-//   var obj = {
-//     name: req.body.name,
-//     desc: req.body.desc,
-//     img: {
-//       data: fs.readFileSync(
-//         path.join(__dirname + "/uploads/" + req.file.filename)
-//       ),
-//       contentType: "image/png",
-//     },
-//   };
-//   imgModel.create(obj, (err, item) => {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       // item.save();
-//       res.redirect("/");
-//     }
-//   });
-// };
 
-// export const fileUpload = (req, res) => {
-//   console.log(req.file);
-//   res.json(req.file).status(200);
-// };
+export const deleteFile = async (req, res) => {
+  try {
+    const data = await File.findByIdAndRemove(req.params.id);
+    // console.log(data.filePath);
+    fs.unlink(data.filePath, (err) => {
+      if (err) {
+        console.log("failed to delete local image:" + err);
+      } else {
+        console.log("successfully deleted local image");
+      }
+    });
+    res.status(200).send(data);
+  } catch (e) {
+    console.log(e);
+    res.status(404).end();
+  }
+};

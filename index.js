@@ -25,7 +25,7 @@ app.post("/signin", signin);
 app.use("/api", api);
 
 const port = process.env.PORT || 9000;
-mongoose
+const conn = mongoose
   .connect(process.env.CONNECTION_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,

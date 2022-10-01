@@ -1,5 +1,5 @@
 import { Content } from "../models/content.js";
-
+import multer from "multer";
 export const getAll = async (req, res) => {
   try {
     const content = await Content.find();
@@ -32,3 +32,14 @@ export const createPost = async (req, res) => {
     res.status(409).json({ message: error.message });
   }
 };
+
+var storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads");
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.fieldname + "-" + Date.now());
+  },
+});
+
+var upload = multer({ storage: storage });

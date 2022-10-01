@@ -7,7 +7,10 @@ const contentSchema = new mongoose.Schema({
     default: new Date(),
   },
   text: String,
-  upload: String,
+  upload: {
+    data: Buffer,
+    contentType: String,
+  },
   uploadedBy: String,
 });
 

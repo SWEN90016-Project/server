@@ -21,10 +21,17 @@ export const signup = async (req, res) => {
     return res.status(400).send({ message: "need email and password" });
   }
   try {
+    console.log(req.body);
+    // const newUser = new User({
+    //   email: req.body.email,
+    //   username: req.body.username,
+    //   password: req.body.password,
+    // });
     const user = await User.create(req.body);
     const token = newToken(user);
     return res.status(201).send({ token });
   } catch (e) {
+    console.log(e);
     res.status(500).end();
   }
 };

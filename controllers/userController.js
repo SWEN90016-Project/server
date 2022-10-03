@@ -27,3 +27,16 @@ export const updateMe = async (req, res) => {
     res.status(400).end();
   }
 };
+
+export const userInfo = async (req, res) => {
+  try {
+    const userAcc = await User.find({}, "username");
+    if (!userAcc) {
+      res.status(404).end();
+    }
+    res.status(200).json({ data: userAcc });
+  } catch (e) {
+    console.log(e);
+    res.status(404).end();
+  }
+};

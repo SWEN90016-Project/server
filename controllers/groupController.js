@@ -4,11 +4,6 @@ import Group from "../models/groups.js";
 export const addGroup = async (req, res) => {
   console.log(req.body);
   try {
-    // const group = new Group({
-    //   groupName: req.body.groupName,
-    //   //   username: req.body.username,
-    // });
-
     const newGroup = await Group.create(req.body);
 
     res.status(200).send(newGroup);
@@ -92,3 +87,5 @@ export const findUserGroups = async (req, res) => {
     console.log(e);
   }
 };
+
+// TODO: DELETE USER FROM GROUP

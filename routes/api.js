@@ -12,6 +12,7 @@ import {
   deleteGroup,
   findUserGroups,
   getGroup,
+  removeUserFromGroup,
 } from "../controllers/groupController.js";
 const router = express.Router();
 router.get("/user", me);
@@ -25,4 +26,5 @@ router.get("/getGroup", getGroup);
 router.put("/addUser/:id", addUserToGroup);
 router.delete("/deleteGroup/:id", deleteGroup);
 router.get("/getUserGroup/:id", findUserGroups);
+router.delete("/removeUserFromGroup/:groupID/:userID", removeUserFromGroup);
 export default router;

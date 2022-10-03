@@ -88,4 +88,17 @@ export const findUserGroups = async (req, res) => {
   }
 };
 
+export const removeUserFromGroup = async (req, res) => {
+  try {
+    const data = await Group.findOneAndUpdate(
+      { _id: req.params.groupID },
+      { $pull: { userList: { _id: req.params.userID } } },
+      { new: true }
+    );
+    res.status(200).send(data);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 // TODO: DELETE USER FROM GROUP

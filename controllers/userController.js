@@ -30,7 +30,7 @@ export const updateMe = async (req, res) => {
 
 export const userInfo = async (req, res) => {
   try {
-    const userAcc = await User.find({}, "username");
+    const userAcc = await User.find({}, "username email");
     if (!userAcc) {
       res.status(404).end();
     }

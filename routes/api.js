@@ -21,6 +21,7 @@ import {
   removeText,
   shareWithUser,
 } from "../controllers/textController.js";
+import { getPerms } from "../utils/auth.js";
 const router = express.Router();
 router.get("/user", me);
 router.put("/user", updateMe);
@@ -39,4 +40,5 @@ router.put("/shareWithUser/:id", shareWithUser);
 router.post("/addText", addText);
 router.get("/getAllText", getAllText);
 router.get("/findUserTexts/:id", findUserTexts);
+router.get("/permsCheck", getPerms);
 export default router;

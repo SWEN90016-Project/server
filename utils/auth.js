@@ -65,6 +65,7 @@ export const signin = async (req, res) => {
 };
 
 export const protect = async (req, res, next) => {
+  console.log(req.headers.authorization.split("Bearer ")[1]);
   if (!req.headers.authorization) {
     return res.status(401).end();
   }
@@ -79,6 +80,30 @@ export const protect = async (req, res, next) => {
       .lean()
       .exec();
     req.user = user;
+    res.status(200).send(user);
+    next();
+  } catch (e) {
+    return res.status(401).end();
+  }
+};
+
+export const getPerms = async (req, res, next) => {
+  console.log(req.headers.authorization);
+  if (!req.headers.authorization) {
+    return res.status(401).end();
+  }
+  const token = req.headers.authorization.split("Bearer ")[1];
+  if (!token) {
+    return res.status(401).end();
+  }
+  try {
+    const payload = await verifyToken(token);
+    const user = await User.findById(payload.id)
+      .select("Permissions")
+      .lean()
+      .exec();
+    // req.user = user;
+    res.status(200).json({ user });
     next();
   } catch (e) {
     return res.status(401).end();

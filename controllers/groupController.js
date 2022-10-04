@@ -28,7 +28,6 @@ export const addUserToGroup = async (req, res) => {
       }
     );
     res.status(200).json({ data });
-    // res.status(200).send(data);
   } catch (e) {
     console.log(e);
   }
@@ -100,5 +99,3 @@ export const removeUserFromGroup = async (req, res) => {
     console.log(e);
   }
 };
-
-// TODO: DELETE USER FROM GROUP

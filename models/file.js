@@ -10,6 +10,10 @@ var FileSchema = new mongoose.Schema({
   filePath: String,
   text: String,
   title: String,
+  edit: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const File = mongoose.model("File", FileSchema);

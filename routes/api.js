@@ -33,7 +33,7 @@ router.route("/single").post(upload.single("myFile"), fileUpload);
 //Read
 router.get("/getFile", getFiles);
 //Update
-router.put("/upateFile/:id", updateFile);
+router.put("/updateFile/:id", updateFile);
 //Delete
 router.delete("/deleteFile/:id", deleteFile);
 router.post("/addGroup", addGroup);

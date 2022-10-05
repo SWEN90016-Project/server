@@ -24,6 +24,11 @@ import {
   updateText,
 } from "../controllers/textController.js";
 import { getPerms } from "../utils/auth.js";
+import {
+  deleteRequest,
+  getRequests,
+  newRequest,
+} from "../controllers/authRequestController.js";
 const router = express.Router();
 router.get("/user", me);
 router.put("/user", updateMe);
@@ -49,4 +54,9 @@ router.get("/getAllText", getAllText);
 router.get("/findUserTexts/:id", findUserTexts);
 router.get("/permsCheck", getPerms);
 router.put("/updateText/:id", updateText);
+// create Request
+router.post("/newRequest", newRequest);
+// get Request
+router.get("/getRequest", getRequests);
+router.delete("/deleteRequest/:id", deleteRequest);
 export default router;

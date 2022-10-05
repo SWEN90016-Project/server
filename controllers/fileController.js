@@ -16,7 +16,7 @@ export const upload = multer({ storage });
 
 export const fileUpload = async (req, res, next) => {
   try {
-    console.log(req.body);
+    // console.log(req.body);
     // TODO: ADD TIME STAMPS
     const file = new File({
       fileName: req.file.originalname,
@@ -61,5 +61,28 @@ export const deleteFile = async (req, res) => {
   } catch (e) {
     console.log(e);
     res.status(404).end();
+  }
+};
+
+//update file
+export const updateFile = async (req, res) => {
+  console.log(req.body);
+  try {
+    const data = await File.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+        $set: { text: req.body.text },
+        function(error, success) {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log(success);
+          }
+        },
+      }
+    );
+    res.status(200).json({ data });
+  } catch (e) {
+    console.log(e);
   }
 };

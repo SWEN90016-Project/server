@@ -101,3 +101,25 @@ export const findUserTexts = async (req, res) => {
     console.log(e);
   }
 };
+//update text
+export const updateText = async (req, res) => {
+  console.log(req.body);
+  try {
+    const data = await Text.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+        $set: { text: req.body.text },
+        function(error, success) {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log(success);
+          }
+        },
+      }
+    );
+    res.status(200).json({ data });
+  } catch (e) {
+    console.log(e);
+  }
+};

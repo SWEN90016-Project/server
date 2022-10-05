@@ -5,6 +5,7 @@ import {
   fileUpload,
   getFiles,
   upload,
+  updateFile,
 } from "../controllers/fileController.js";
 import {
   addGroup,
@@ -20,14 +21,20 @@ import {
   getAllText,
   removeText,
   shareWithUser,
+  updateText,
 } from "../controllers/textController.js";
 import { getPerms } from "../utils/auth.js";
 const router = express.Router();
 router.get("/user", me);
 router.put("/user", updateMe);
 router.get("/userInfo", userInfo);
+//Create
 router.route("/single").post(upload.single("myFile"), fileUpload);
+//Read
 router.get("/getFile", getFiles);
+//Update
+router.put("/upateFile/:id", updateFile);
+//Delete
 router.delete("/deleteFile/:id", deleteFile);
 router.post("/addGroup", addGroup);
 router.get("/getGroup", getGroup);
@@ -41,4 +48,5 @@ router.post("/addText", addText);
 router.get("/getAllText", getAllText);
 router.get("/findUserTexts/:id", findUserTexts);
 router.get("/permsCheck", getPerms);
+router.put("/updateText/:id", updateText);
 export default router;

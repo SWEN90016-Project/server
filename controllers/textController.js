@@ -8,6 +8,7 @@ export const addText = async (req, res) => {
   try {
     const text = new Text({
       text: req.body.text,
+      postedBy: req.body.postedBy,
       sharedWith: [
         {
           _id: mongoose.Types.ObjectId(req.body.id),

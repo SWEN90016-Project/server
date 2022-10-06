@@ -16,8 +16,6 @@ export const upload = multer({ storage });
 
 export const fileUpload = async (req, res, next) => {
   try {
-    // console.log(req.body);
-    // TODO: ADD TIME STAMPS
     const file = new File({
       fileName: req.file.originalname,
       fileType: req.file.mimetype,
@@ -25,6 +23,7 @@ export const fileUpload = async (req, res, next) => {
       filePath: req.file.path,
       text: req.body.text,
       title: req.body.title,
+      postedBy: req.body.username,
     });
     const fileUploaded = await file.save();
     res.status(201).json({ message: "the file upload success", fileUploaded });

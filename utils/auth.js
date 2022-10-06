@@ -99,7 +99,7 @@ export const getPerms = async (req, res, next) => {
   try {
     const payload = await verifyToken(token);
     const user = await User.findById(payload.id)
-      .select("Permissions")
+      .select("Permissions username")
       .lean()
       .exec();
     // req.user = user;

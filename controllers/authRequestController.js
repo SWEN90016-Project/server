@@ -2,8 +2,6 @@ import AuthRequest from "../models/authRequest.js";
 
 export const newRequest = async (req, res, next) => {
   try {
-    // console.log(req.body);
-    // TODO: ADD TIME STAMPS
     const request = new AuthRequest({
       _id: req.body._id,
       username: req.body.username,

@@ -21,8 +21,8 @@ export const userSchema = new mongoose.Schema(
     },
     Permissions: {
       type: String,
-      enum: ["new", "create", "read", "update", "delete", "admin", "client"],
-      default: "new",
+      enum: ["create", "read", "update", "delete", "admin", "client"],
+      default: "read",
     },
   },
   { timestamps: true }

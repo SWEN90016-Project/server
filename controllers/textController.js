@@ -92,12 +92,12 @@ export const findUserTexts = async (req, res) => {
       res.status(404).end();
     }
 
-    const texts = await Text.find({
+    const data = await Text.find({
       _id: { $in: textID },
     });
-    console.log(texts);
+    console.log(data);
 
-    res.status(200).json({ texts });
+    res.status(200).json({ data });
   } catch (e) {
     console.log(e);
   }

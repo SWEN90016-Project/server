@@ -85,3 +85,25 @@ export const updateFile = async (req, res) => {
     console.log(e);
   }
 };
+
+export const download = async (req, res) => {
+  console.log(req.body);
+  try {
+    const data = await File.findById(req.params.id).select("filePath");
+    if (!data) {
+      res.status(404).end();
+    }
+
+    res.download(data.filePath, function (err) {
+      if (err) {
+        if (res.headersSent) {
+        } else {
+          return res.sendStatus(404);
+        }
+      } else {
+      }
+    });
+  } catch (e) {
+    console.log(e);
+  }
+};

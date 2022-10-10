@@ -6,6 +6,7 @@ import {
   getFiles,
   upload,
   updateFile,
+  download,
 } from "../controllers/fileController.js";
 import {
   addGroup,
@@ -41,6 +42,8 @@ router.get("/getFile", getFiles);
 router.put("/updateFile/:id", updateFile);
 //Delete
 router.delete("/deleteFile/:id", deleteFile);
+//Download
+router.get("/download/:id", download);
 router.post("/addGroup", addGroup);
 router.get("/getGroup", getGroup);
 router.put("/addUser/:id", addUserToGroup);

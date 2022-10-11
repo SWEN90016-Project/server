@@ -14,6 +14,10 @@ export const addText = async (req, res) => {
           _id: mongoose.Types.ObjectId(req.body.id),
           username: req.body.username,
         },
+        {
+          _id: mongoose.Types.ObjectId(req.body.postedById),
+          username: req.body.postedBy,
+        },
       ],
     });
     text.save();

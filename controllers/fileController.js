@@ -15,6 +15,7 @@ const storage = multer.diskStorage({
 export const upload = multer({ storage });
 
 export const fileUpload = async (req, res, next) => {
+  console.log(req.file);
   try {
     const file = new File({
       fileName: req.file.originalname,
